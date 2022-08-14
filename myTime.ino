@@ -9,6 +9,8 @@ int Second = 0;
 int Minute = 0;
 int Hour = 0;
 
+int dock = 0; //ドックンドックン
+
 
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
@@ -19,7 +21,7 @@ void setup() {
   lcd.setCursor(0, 0);       // カーソルの位置を指定
   lcd.print("heart time");       // 文字の表示
   pinMode(LED13, OUTPUT);
-  Serial.begin(9600);
+  Serial.begin(57600);
   delay(2000);
 }
 
@@ -49,7 +51,11 @@ void loop() {
     count = 1;
   }
   if (count == 0) {
+    dock += 1;
+  }
+  if (dock == 2) {
     Second += 1;
+    dock = 0;
   }
   Serial.println(Signal);
   delay(100);
